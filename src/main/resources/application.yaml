@@ -27,7 +27,7 @@ model:
     - dashscope
   base-urls:
     # 留空表示使用 DashScope SDK 默认地址
-    - ""
+    -
   api-keys:
     -
   models:
