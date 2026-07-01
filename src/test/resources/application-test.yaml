@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    # In-memory DB for tests; extension loading handled by SqliteDataSourceConfig
+    url: jdbc:sqlite:file::memory:?cache=shared
+    driver-class-name: org.sqlite.JDBC
+    username:
+    password:
+  # 测试环境同样接入真实 DashScope API（ChatModel / EmbeddingModel 由 starter 自动装配）
+  # API Key 复用 application.yaml 中的 spring.ai.dashscope.api-key
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  # Auto-scan for @Mapper interfaces in the test classpath
+  type-aliases-package: com.fateironist.jawf.model

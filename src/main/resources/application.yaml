@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: jawf
+  datasource:
+    url: jdbc:sqlite:vec_db.db
+    driver-class-name: org.sqlite.JDBC
+    username:
+    password:
+  # 使用下方自定义 model.* 配置手动创建 ChatModel / EmbeddingModel，
+  # 因此排除 DashScope starter 的自动配置，避免重复创建并要求 spring.ai.dashscope.api-key
+  autoconfigure:
+    exclude:
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeChatAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAgentAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeImageAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeVideoAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAudioSpeechAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAudioTranscriptionAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeRerankAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeEmbeddingAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeMultimodalEmbeddingAutoConfiguration
+      - com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeAsyncToolCallingManagerAutoConfiguration
+
+# 多厂商模型统一配置
+model:
+  vendors:
+    - dashscope
+  base-urls:
+    # 留空表示使用 DashScope SDK 默认地址
+    - ""
+  api-keys:
+    -
+  models:
+    # 格式：厂商名_模型名
+    - dashscope_deepseek-v4-flash
+    - dashscope_text-embedding-v3
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
